@@ -31,16 +31,19 @@ currentInfo.scale = 'kelvin';
 
 function kelvinToFahrenheit(K) {
     let anwser = (1.8 * (K - 273.15) + 32);
+    currentInfo.scale = 'Fahrenheit';
     return anwser;
 };
 
 function fahrenheitToCelcius(F) {
     let anwser = (((F - 32) * 5) / 9);
+    currentInfo.scale = 'Celcius';
     return anwser;
 };
 
 function celciusToFahrenheit(C) {
     let anwser = (((C * 9) / 5) + 32);
+    currentInfo.scale = 'Fahrenheit';
     return anwser;
 };
 
@@ -65,6 +68,7 @@ async function getLocalWeather() {
         let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=0a7116bb4c058a3743fcaa50e8b100f6`, {mode: 'cors'});
         let cityInfo = await response.json();
         storesFetchedData(cityInfo);
+        getsRidOfKelvin();
         console.log(currentInfo);
     } catch (err) {
         console.log(err);

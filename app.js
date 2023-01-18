@@ -1,6 +1,13 @@
 const elements = {
     input: document.getElementById('city'),
     button: document.querySelector('button'),
+    cityName: document.getElementById('city-name'),
+    dailyLow: document.getElementById('daily-low'),
+    currentTemperature: document.getElementById('current-temperature'),
+    dailyHigh: document.getElementById('daily-high'),
+    humidity: document.getElementById('humidity'),
+    windSpeed: document.getElementById('wind-speed'),
+    windHeading: document.getElementById('wind-heading'),
 };
 
 let currentInfo = {
@@ -26,36 +33,41 @@ currentInfo.dailyLow = cityObject.main.temp_min;
 currentInfo.humidity = cityObject.main.humidity;
 currentInfo.windDeg = cityObject.wind.deg;
 currentInfo.windSpeed = cityObject.wind.speed;
-currentInfo.scale = 'kelvin';
+currentInfo.scale = 'K';
 };
 
 function kelvinToFahrenheit(K) {
     let anwser = (1.8 * (K - 273.15) + 32);
-    currentInfo.scale = 'Fahrenheit';
+    currentInfo.scale = 'F';
     return anwser;
 };
 
 function fahrenheitToCelcius(F) {
     let anwser = (((F - 32) * 5) / 9);
-    currentInfo.scale = 'Celcius';
+    currentInfo.scale = 'C';
     return anwser;
 };
 
 function celciusToFahrenheit(C) {
     let anwser = (((C * 9) / 5) + 32);
-    currentInfo.scale = 'Fahrenheit';
+    currentInfo.scale = 'F';
     return anwser;
 };
 
-function printsTemps() {
-    console.log(`currentScale: ${currentInfo.scale}, currentTemp: ${currentInfo.currentTemp}, dailyHigh: ${currentInfo.dailyHigh}, dailyLow: ${currentInfo.dailyLow}`)
+function updatesPage() {
+    elements.cityName.textContent = currentInfo.name;
+    elements.dailyLow.textContent = currentInfo.dailyLow;
+    elements.currentTemperature.textContent = currentInfo.currentTemp;
+    elements.dailyHigh.textContent = currentInfo.dailyHigh;
+    elements.humidity.textContent = currentInfo.humidity;
+    elements.windSpeed.textContent = currentInfo.windSpeed;
+    elements.windHeading.textContent = currentInfo.windDeg;
 }
 
 function getsRidOfKelvin() {
     currentInfo.currentTemp = kelvinToFahrenheit(currentInfo.currentTemp);
     currentInfo.dailyHigh = kelvinToFahrenheit(currentInfo.dailyHigh);
     currentInfo.dailyLow = kelvinToFahrenheit(currentInfo.dailyLow);
-    console.log(currentInfo.currentTemp, currentInfo.dailyHigh, currentInfo.dailyLow);
 };
 
 const elementsHandlers = (() => {
@@ -69,7 +81,7 @@ async function getLocalWeather() {
         let cityInfo = await response.json();
         storesFetchedData(cityInfo);
         getsRidOfKelvin();
-        console.log(currentInfo);
+        updatesPage();
     } catch (err) {
         console.log(err);
     };

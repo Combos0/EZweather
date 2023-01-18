@@ -9,7 +9,43 @@
     <title>EZ Weather</title>
 </head>
 <body>
-    <input id="city">
-    <button type="button">find weather</button>
+    <div id="search">
+        <input id="city" placeholder="Jacksonville">
+        <button type="button">find weather</button>
+    </div>
+    <div id="main-info">
+        <div id="header">
+            <h2>City name here</h2>
+            <h4 id="city-name"></h4>
+        </div>
+        <div id="temp-display">
+            <div class="temp">
+                <p>Daily Low</p>
+                <p id="daily-low"></p>
+            </div>
+            <div class="temp">
+                <p>Temp</p>
+                <p id="current-temperature"></p>
+            </div>
+            <div class="temp">
+                <p>Daily High</p>
+                <p id="daily-high"></p>
+            </div>
+        </div>
+    </div>
+    <div id="data-display">
+        <div class="data">
+            <p>Humidity</p>
+            <p id="humidity"></p>
+        </div>
+        <div class="data">
+            <p>Wind Speed</p>
+            <p id="wind-speed"></p>
+        </div>
+        <div class="data">
+            <p>Wind Heading</p>
+            <p id="wind-heading"></p>
+        </div>
+    </div>
 </body>
 </html>
